@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://donngchao.github.io/sitemap.xml 

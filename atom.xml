@@ -4,7 +4,7 @@
   <title><![CDATA[Blog to be better everyday]]></title>
   <link href="http://donngchao.github.io/atom.xml" rel="self"/>
   <link href="http://donngchao.github.io/"/>
-  <updated>2017-01-09T23:03:59+08:00</updated>
+  <updated>2017-01-10T14:39:40+08:00</updated>
   <id>http://donngchao.github.io/</id>
   <author>
     <name><![CDATA[LAWES]]></name>
@@ -12,6 +12,69 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Thesis Principle]]></title>
+    <link href="http://donngchao.github.io/blog/2017/01/10/thesis-principle/"/>
+    <updated>2017-01-10T14:26:49+08:00</updated>
+    <id>http://donngchao.github.io/blog/2017/01/10/thesis-principle</id>
+    <content type="html"><![CDATA[<h1>Image Processing</h1>
+
+<h2>Numerical Analysis</h2>
+
+<p><strong>Matrix</strong></p>
+
+<p><code>IMAGE</code></p>
+
+<ul>
+<li>What is image
+
+<ul>
+<li>pixals</li>
+<li>matrix</li>
+</ul>
+</li>
+<li>Matlab</li>
+</ul>
+
+
+<blockquote><p>Reference</p>
+
+<p>Create matrix C. Display an image of the data in C. Add a colorbar to the graph to show the current colormap.</p></blockquote>
+
+<ul>
+<li>Create matrix C. Display an image of the data in C. Add a colorbar to the graph to show the current colormap.</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>This is image processing in  Matlab </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='matlab'><span class='line'><span class="n">C</span> <span class="p">=</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">2</span> <span class="mi">4</span> <span class="mi">6</span><span class="p">;</span> <span class="mi">8</span> <span class="mi">10</span> <span class="mi">12</span> <span class="mi">14</span><span class="p">;</span> <span class="mi">16</span> <span class="mi">18</span> <span class="mi">20</span> <span class="mi">22</span><span class="p">];</span>
+</span><span class='line'><span class="n">image</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+</span><span class='line'><span class="n">colorbar</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Read a JPEG image file</li>
+</ul>
+
+
+<p>imread returns a 650-by-600-by-3 array, C.</p>
+
+<figure class='code'><figcaption><span>show images in Matlab </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='matlab'><span class='line'><span class="n">C</span> <span class="p">=</span> <span class="n">imread</span><span class="p">(</span><span class="s">&#39;ngc6543a.jpg&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="n">image</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hello World]]></title>

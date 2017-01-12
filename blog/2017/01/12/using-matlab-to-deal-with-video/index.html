@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Thesis Principle - Blog to be better everyday</title>
+  <title>Using Matlab to Deal With Video - Blog to be better everyday</title>
   <meta name="author" content="LAWES">
 
   
-  <meta name="description" content="Image Processing Numerical Analysis Matrix IMAGE What is image pixals
-matrix Matlab Reference Create matrix C. Display an image of the data in C. Add &hellip;">
+  <meta name="description" content="About video compression Used technologies DCT
+Motion Compensation
+Quantization This example shows how to compress a video using motion compensation &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@ matrix Matlab Reference Create matrix C. Display an image of the data in C. Add 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://donngchao.github.io/blog/2017/01/10/thesis-principle/">
+  <link rel="canonical" href="http://donngchao.github.io/blog/2017/01/12/using-matlab-to-deal-with-video/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Blog to be better everyday" type="application/atom+xml">
@@ -70,7 +71,7 @@ matrix Matlab Reference Create matrix C. Display an image of the data in C. Add 
   
   <header>
     
-      <h1 class="entry-title">Thesis Principle</h1>
+      <h1 class="entry-title">Using Matlab to Deal With Video</h1>
     
     
       <p class="meta">
@@ -79,68 +80,83 @@ matrix Matlab Reference Create matrix C. Display an image of the data in C. Add 
 
 
 
-<time class='entry-date' datetime='2017-01-10T14:26:49+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>2:26 pm</span></time>
+<time class='entry-date' datetime='2017-01-12T16:29:28+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>4:29 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h1>Image Processing</h1>
+<div class="entry-content"><h1>About video compression</h1>
 
-<h2>Numerical Analysis</h2>
-
-<p><strong>Matrix</strong></p>
-
-<p><code>IMAGE</code></p>
+<h2>Used technologies</h2>
 
 <ul>
-<li>What is image
-
-<ul>
-<li>pixals</li>
-<li>matrix</li>
-</ul>
-</li>
-<li>Matlab</li>
+<li>DCT</li>
+<li>Motion Compensation</li>
+<li>Quantization</li>
 </ul>
 
 
-<blockquote><p>Reference</p>
+<p>This example shows how to compress a video using motion compensation and discrete cosine transform (DCT) techniques.</p>
 
-<p>Create matrix C. Display an image of the data in C. Add a colorbar to the graph to show the current colormap.</p></blockquote>
+<p>The example calculates motion vectors between successive frames and uses them to reduce redundant information.</p>
 
-<ul>
-<li>Create matrix C. Display an image of the data in C. Add a colorbar to the graph to show the current colormap.</li>
-</ul>
+<p>Then it divides each frame into submatrices and applies the discrete cosine transform to each submatrix. Finally, the example applies a quantization technique to achieve further compression.</p>
 
+<p>The Decoder subsystem performs the inverse process to recover the original video.</p>
 
-<figure class='code'><figcaption><span>This is image processing in  Matlab </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='matlab'><span class='line'><span class="n">C</span> <span class="p">=</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">2</span> <span class="mi">4</span> <span class="mi">6</span><span class="p">;</span> <span class="mi">8</span> <span class="mi">10</span> <span class="mi">12</span> <span class="mi">14</span><span class="p">;</span> <span class="mi">16</span> <span class="mi">18</span> <span class="mi">20</span> <span class="mi">22</span><span class="p">];</span>
-</span><span class='line'><span class="n">image</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
-</span><span class='line'><span class="n">colorbar</span>
-</span></code></pre></td></tr></table></div></figure>
+<h2>About encoder subsystem</h2>
 
+<p><strong>我们首先需要构建的是编码系统：</strong></p>
 
-<ul>
-<li>Read a JPEG image file</li>
-</ul>
+<p>本例子的目的是利用运动补偿和离散傅里叶变换的技术来实现对视频数据的压缩。</p>
 
+<p>通过计算连续的帧之间的运动向量来减少冗余的信息。</p>
 
-<p>imread returns a 650-by-600-by-3 array, C.</p>
+<p>同时将每一帧的图片分割成小的矩阵，然后再对每个小的矩阵应用离散傅里叶变换。</p>
 
-<figure class='code'><figcaption><span>show images in Matlab </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='matlab'><span class='line'><span class="n">C</span> <span class="p">=</span> <span class="n">imread</span><span class="p">(</span><span class="s">&#39;ngc6543a.jpg&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="n">image</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>最后要说的不是最不重要的，就是使用量化的技术来实现进一步的压缩。</p>
 
+<h2>About decoder subsystem</h2>
 
+<p><strong>对于解码系统：</strong></p>
 
+<p>将上述提到的整个过程逆着运行一遍即可。</p>
+
+<p>The Block Processing block sends 16-by-16 submatrices of each video frame to the Block Processing block&rsquo;s subsystem for processing.</p>
+
+<p>Within this subsystem, the model applies a motion compensation technique and the DCT to the video stream.</p>
+
+<p>By discarding many high-frequency coefficients in the DCT output, the example reduces the bit rate of the input video.</p>
+
+<p>块处理器将每个视频帧的16*16的子矩阵发送到块处理器的子系统进行处理。</p>
+
+<p>在子系统中，整个模型对于视频流采用了运动补偿技术以DCT技术。</p>
+
+<p>通过丢弃DCT的输出中的高频部分，本例子尝试减少输入视频的码率。</p>
+
+<p>这里面会用到simulink的相关知识，这一块需要进一步的学习。</p>
+
+<p>The Decoded window shows the compressed video stream.</p>
+
+<p>You can see that the compressed video is not as clear as the original video, shown in the Original window, but it still contains many of its features.</p>
+
+<p>解码的窗口显示的是压缩后的视频流，可以看到压缩后的视频不如原始的视频那么清晰，但是仍然含有原始视频的</p>
+
+<p>大多数特征。</p>
+
+<h2>About simulink</h2>
+
+<p>找到模型相关的例子，研究例子的搭建原理，修改其中的某些参数，观察结果。遇到问题再修改。</p>
+
+<h2>Summary</h2>
+
+<p><strong>总结</strong></p>
+
+<p>前面提到了video compression 的相关技术背景，至于怎样实现呢？ 需要进一步的分析simulink在其中扮演的</p>
+
+<p>角色。</p>
 </div>
 
 
@@ -156,7 +172,7 @@ matrix Matlab Reference Create matrix C. Display an image of the data in C. Add 
 
 
 
-<time class='entry-date' datetime='2017-01-10T14:26:49+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>2:26 pm</span></time>
+<time class='entry-date' datetime='2017-01-12T16:29:28+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>4:29 pm</span></time>
       
 
 <span class="categories">
@@ -170,7 +186,7 @@ matrix Matlab Reference Create matrix C. Display an image of the data in C. Add 
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://donngchao.github.io/blog/2017/01/10/thesis-principle/" data-via="" data-counturl="http://donngchao.github.io/blog/2017/01/10/thesis-principle/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://donngchao.github.io/blog/2017/01/12/using-matlab-to-deal-with-video/" data-via="" data-counturl="http://donngchao.github.io/blog/2017/01/12/using-matlab-to-deal-with-video/" >Tweet</a>
   
   
   
@@ -193,10 +209,8 @@ matrix Matlab Reference Create matrix C. Display an image of the data in C. Add 
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2017/01/09/hello-world/" title="Previous Post: hello world">&laquo; hello world</a>
+        <a class="basic-alignment left" href="/blog/2017/01/10/thesis-principle/" title="Previous Post: thesis principle">&laquo; thesis principle</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2017/01/12/using-matlab-to-deal-with-video/" title="Next Post: using matlab to deal with video">using matlab to deal with video &raquo;</a>
       
     </p>
   </footer>
@@ -205,7 +219,7 @@ matrix Matlab Reference Create matrix C. Display an image of the data in C. Add 
   <section>
     <h1>Comments</h1>
     <div id="disqus_thread" aria-live="polite"><!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="/blog/2017/01/10/thesis-principle" data-title="thesis principle" data-url="http://donngchao.github.io/blog/2017/01/10/thesis-principle/"></div>
+	<div class="ds-thread" data-thread-key="/blog/2017/01/12/using-matlab-to-deal-with-video" data-title="using matlab to deal with video" data-url="http://donngchao.github.io/blog/2017/01/12/using-matlab-to-deal-with-video/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">

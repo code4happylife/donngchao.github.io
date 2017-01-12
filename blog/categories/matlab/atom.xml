@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Matlab | Blog to be better everyday]]></title>
   <link href="http://donngchao.github.io/blog/categories/matlab/atom.xml" rel="self"/>
   <link href="http://donngchao.github.io/"/>
-  <updated>2017-01-10T14:39:40+08:00</updated>
+  <updated>2017-01-12T17:40:05+08:00</updated>
   <id>http://donngchao.github.io/</id>
   <author>
     <name><![CDATA[LAWES]]></name>
@@ -12,6 +12,84 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Matlab to Deal With Video]]></title>
+    <link href="http://donngchao.github.io/blog/2017/01/12/using-matlab-to-deal-with-video/"/>
+    <updated>2017-01-12T16:29:28+08:00</updated>
+    <id>http://donngchao.github.io/blog/2017/01/12/using-matlab-to-deal-with-video</id>
+    <content type="html"><![CDATA[<h1>About video compression</h1>
+
+<h2>Used technologies</h2>
+
+<ul>
+<li>DCT</li>
+<li>Motion Compensation</li>
+<li>Quantization</li>
+</ul>
+
+
+<p>This example shows how to compress a video using motion compensation and discrete cosine transform (DCT) techniques.</p>
+
+<p>The example calculates motion vectors between successive frames and uses them to reduce redundant information.</p>
+
+<p>Then it divides each frame into submatrices and applies the discrete cosine transform to each submatrix. Finally, the example applies a quantization technique to achieve further compression.</p>
+
+<p>The Decoder subsystem performs the inverse process to recover the original video.</p>
+
+<h2>About encoder subsystem</h2>
+
+<p><strong>我们首先需要构建的是编码系统：</strong></p>
+
+<p>本例子的目的是利用运动补偿和离散傅里叶变换的技术来实现对视频数据的压缩。</p>
+
+<p>通过计算连续的帧之间的运动向量来减少冗余的信息。</p>
+
+<p>同时将每一帧的图片分割成小的矩阵，然后再对每个小的矩阵应用离散傅里叶变换。</p>
+
+<p>最后要说的不是最不重要的，就是使用量化的技术来实现进一步的压缩。</p>
+
+<h2>About decoder subsystem</h2>
+
+<p><strong>对于解码系统：</strong></p>
+
+<p>将上述提到的整个过程逆着运行一遍即可。</p>
+
+<p>The Block Processing block sends 16-by-16 submatrices of each video frame to the Block Processing block&rsquo;s subsystem for processing.</p>
+
+<p>Within this subsystem, the model applies a motion compensation technique and the DCT to the video stream.</p>
+
+<p>By discarding many high-frequency coefficients in the DCT output, the example reduces the bit rate of the input video.</p>
+
+<p>块处理器将每个视频帧的16*16的子矩阵发送到块处理器的子系统进行处理。</p>
+
+<p>在子系统中，整个模型对于视频流采用了运动补偿技术以DCT技术。</p>
+
+<p>通过丢弃DCT的输出中的高频部分，本例子尝试减少输入视频的码率。</p>
+
+<p>这里面会用到simulink的相关知识，这一块需要进一步的学习。</p>
+
+<p>The Decoded window shows the compressed video stream.</p>
+
+<p>You can see that the compressed video is not as clear as the original video, shown in the Original window, but it still contains many of its features.</p>
+
+<p>解码的窗口显示的是压缩后的视频流，可以看到压缩后的视频不如原始的视频那么清晰，但是仍然含有原始视频的</p>
+
+<p>大多数特征。</p>
+
+<h2>About simulink</h2>
+
+<p>找到模型相关的例子，研究例子的搭建原理，修改其中的某些参数，观察结果。遇到问题再修改。</p>
+
+<h2>Summary</h2>
+
+<p><strong>总结</strong></p>
+
+<p>前面提到了video compression 的相关技术背景，至于怎样实现呢？ 需要进一步的分析simulink在其中扮演的</p>
+
+<p>角色。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Thesis Principle]]></title>

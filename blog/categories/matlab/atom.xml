@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Matlab | Blog to be better everyday]]></title>
   <link href="http://donngchao.github.io/blog/categories/matlab/atom.xml" rel="self"/>
   <link href="http://donngchao.github.io/"/>
-  <updated>2017-01-12T17:40:05+08:00</updated>
+  <updated>2017-01-14T00:00:02+08:00</updated>
   <id>http://donngchao.github.io/</id>
   <author>
     <name><![CDATA[LAWES]]></name>
@@ -12,6 +12,92 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Avi Video Processing]]></title>
+    <link href="http://donngchao.github.io/blog/2017/01/13/simulink-details/"/>
+    <updated>2017-01-13T18:32:57+08:00</updated>
+    <id>http://donngchao.github.io/blog/2017/01/13/simulink-details</id>
+    <content type="html"><![CDATA[<blockquote><p>在交通运输、工业生产、通信广播、生物医药、遥感测绘等工程应用以及科学研究领域中，常常需要将采集到的视频影像以AVI格式存储为数字视频文件再进行分析和处理，由于运动图像是由一帧帧静态图像组成的，因此视频文件的数据量是非常大的，这给信息的存储、分析、处理和传输都带来了一定的困难。在一些文献中介绍了用VC++以及其他工具实现了对AVI文件的分析和处理，编程比较复杂。而Matlab是以矩阵为运算基础的计算软件，最适宜处理诸如图像等二维信息。那么究竟怎样使用Matlab分析和处理AVI视频图像的方法。</p></blockquote>
+
+<p>音视频交错AVI是Microsoft公司开发的一种符合资源互换文件格式RIFF的数字音频和视频文件格式，多用于视音频的捕捉、编辑、回放等应用程序中。一个AVI文件可以包含多个不同类型的媒体流，它以一系列的位图来存储视频信息，并在文件中加入数字形式存储的视频信息，实际上是由一组信息流组成的文件。</p>
+
+<pre><code class="matlab This is how to read in avi format video">
+fp = fopen('shuttle.avi');%打开AVI文件
+
+fseek(fp,12,0);%跳过文件的头数据
+
+Info_Start = fscanf(fp,'%c',4);%信息块的起始标记
+
+Info_Size = fread(fp,1,'uint32');%信息块的大小
+
+fseek (fp,44,0);
+
+dwWidth = fread(fp,1,'uint32');%视频图像的宽度（像素数）
+
+dwHeight = fread(fp,1,'uint32');%视频图像的高度（像素数）
+
+fseek(fp,Info_Size - 52,0);%跳过信息块数据
+
+Movi_stat = fscanf(fp,'%c',4);%数据块起始标记‘LIST’
+</code></pre>
+
+<blockquote><p>readFrame</p>
+
+<p>Read video frame from video file
+ close Finish writing and close video file.</p>
+
+<p> close(OBJ)</p>
+
+<p> closes the file associated with video</p>
+
+<p> writer object OBJ.</p>
+
+<p> writeVideo(v,img) writes data from an array to the video file associated with v.</p></blockquote>
+
+<pre><code class="matlab Use haar method deal with video">
+fileinfo = VideoReader('shuttle.avi');
+
+mov0 = VideoWriter('compressed.avi');
+
+open(mov0);
+
+i = 1;
+
+mov1 = VideoReader('shuttle.avi');
+
+while(mov1.hasFrame)  
+
+    temp = readFrame(mov1);
+
+    imwrite(temp,strcat('m',int2str(i),'.bmp'),'bmp');
+
+    Ar = temp(:,:,1);
+
+    Ag = temp(:,:,2);
+
+    Ab = temp(:,:,3);
+
+    [cAr,cHr,cVr,cDr] = dwt2(double(Ar),'haar');
+
+    [cAg,cHg,cVg,cDg] = dwt2(double(Ag),'haar');
+
+    [cAb,cHb,cVb,cDb] = dwt2(double(Ab),'haar');
+
+    mov(:,:,1) = [cAr,cHr,cVr,cDr];
+
+    mov(:,:,2) = [cAg,cHg,cVg,cDg];
+
+    mov(:,:,3) = [cAb,cHb,cVb,cDb];    
+
+    writeVideo(mov0,uint8(mov)); %There is some problem   
+
+    i= i + 1;
+end
+close(mov0);
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using Matlab to Deal With Video]]></title>

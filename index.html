@@ -9,9 +9,7 @@
   <meta name="author" content="LAWES">
 
   
-  <meta name="description" content="About video compression Used technologies DCT
-Motion Compensation
-Quantization This example shows how to compress a video using motion compensation &hellip;">
+  <meta name="description" content="在交通运输、工业生产、通信广播、生物医药、遥感测绘等工程应用以及科学研究领域中，常常需要将采集到的视频影像以AVI格式存储为数字视频文件再进行分析和处理，由于运动图像是由一帧帧静态图像组成的，因此视频文件的数据量是非常大的，这给信息的存储、分析、处理和传输都带来了一定的困难。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +66,172 @@ Quantization This example shows how to compress a video using motion compensatio
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/01/13/simulink-details/">Avi Video Processing</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-01-13T18:32:57+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>6:32 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>在交通运输、工业生产、通信广播、生物医药、遥感测绘等工程应用以及科学研究领域中，常常需要将采集到的视频影像以AVI格式存储为数字视频文件再进行分析和处理，由于运动图像是由一帧帧静态图像组成的，因此视频文件的数据量是非常大的，这给信息的存储、分析、处理和传输都带来了一定的困难。在一些文献中介绍了用VC++以及其他工具实现了对AVI文件的分析和处理，编程比较复杂。而Matlab是以矩阵为运算基础的计算软件，最适宜处理诸如图像等二维信息。那么究竟怎样使用Matlab分析和处理AVI视频图像的方法。</p></blockquote>
+
+<p>音视频交错AVI是Microsoft公司开发的一种符合资源互换文件格式RIFF的数字音频和视频文件格式，多用于视音频的捕捉、编辑、回放等应用程序中。一个AVI文件可以包含多个不同类型的媒体流，它以一系列的位图来存储视频信息，并在文件中加入数字形式存储的视频信息，实际上是由一组信息流组成的文件。</p>
+
+<figure class='code'><figcaption><span>This is how to read in avi format video</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='matlab'><span class='line'><span class="n">fp</span> <span class="p">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#39;shuttle.avi&#39;</span><span class="p">);</span><span class="c">%打开AVI文件</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">fseek</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span><span class="c">%跳过文件的头数据</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">Info_Start</span> <span class="p">=</span> <span class="n">fscanf</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span><span class="s">&#39;%c&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span><span class="c">%信息块的起始标记</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">Info_Size</span> <span class="p">=</span> <span class="n">fread</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s">&#39;uint32&#39;</span><span class="p">);</span><span class="c">%信息块的大小</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">fseek</span> <span class="p">(</span><span class="n">fp</span><span class="p">,</span><span class="mi">44</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">dwWidth</span> <span class="p">=</span> <span class="n">fread</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s">&#39;uint32&#39;</span><span class="p">);</span><span class="c">%视频图像的宽度（像素数）</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">dwHeight</span> <span class="p">=</span> <span class="n">fread</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s">&#39;uint32&#39;</span><span class="p">);</span><span class="c">%视频图像的高度（像素数）</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">fseek</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span><span class="n">Info_Size</span> <span class="o">-</span> <span class="mi">52</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span><span class="c">%跳过信息块数据</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">Movi_stat</span> <span class="p">=</span> <span class="n">fscanf</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span><span class="s">&#39;%c&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span><span class="c">%数据块起始标记‘LIST’</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>readFrame</p>
+
+<p>Read video frame from video file
+ close Finish writing and close video file.</p>
+
+<p> close(OBJ)</p>
+
+<p> closes the file associated with video</p>
+
+<p> writer object OBJ.</p>
+
+<p> writeVideo(v,img) writes data from an array to the video file associated with v.</p></blockquote>
+
+<figure class='code'><figcaption><span>Use haar method deal with video</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+</pre></td><td class='code'><pre><code class='matlab'><span class='line'><span class="n">fileinfo</span> <span class="p">=</span> <span class="n">VideoReader</span><span class="p">(</span><span class="s">&#39;shuttle.avi&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">mov0</span> <span class="p">=</span> <span class="n">VideoWriter</span><span class="p">(</span><span class="s">&#39;compressed.avi&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">open</span><span class="p">(</span><span class="n">mov0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">mov1</span> <span class="p">=</span> <span class="n">VideoReader</span><span class="p">(</span><span class="s">&#39;shuttle.avi&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">while</span><span class="p">(</span><span class="n">mov1</span><span class="p">.</span><span class="n">hasFrame</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">temp</span> <span class="p">=</span> <span class="n">readFrame</span><span class="p">(</span><span class="n">mov1</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">imwrite</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span><span class="n">strcat</span><span class="p">(</span><span class="s">&#39;m&#39;</span><span class="p">,</span><span class="n">int2str</span><span class="p">(</span><span class="nb">i</span><span class="p">),</span><span class="s">&#39;.bmp&#39;</span><span class="p">),</span><span class="s">&#39;bmp&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">Ar</span> <span class="p">=</span> <span class="n">temp</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">Ag</span> <span class="p">=</span> <span class="n">temp</span><span class="p">(:,:,</span><span class="mi">2</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">Ab</span> <span class="p">=</span> <span class="n">temp</span><span class="p">(:,:,</span><span class="mi">3</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">[</span><span class="n">cAr</span><span class="p">,</span><span class="n">cHr</span><span class="p">,</span><span class="n">cVr</span><span class="p">,</span><span class="n">cDr</span><span class="p">]</span> <span class="p">=</span> <span class="n">dwt2</span><span class="p">(</span><span class="n">double</span><span class="p">(</span><span class="n">Ar</span><span class="p">),</span><span class="s">&#39;haar&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">[</span><span class="n">cAg</span><span class="p">,</span><span class="n">cHg</span><span class="p">,</span><span class="n">cVg</span><span class="p">,</span><span class="n">cDg</span><span class="p">]</span> <span class="p">=</span> <span class="n">dwt2</span><span class="p">(</span><span class="n">double</span><span class="p">(</span><span class="n">Ag</span><span class="p">),</span><span class="s">&#39;haar&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">[</span><span class="n">cAb</span><span class="p">,</span><span class="n">cHb</span><span class="p">,</span><span class="n">cVb</span><span class="p">,</span><span class="n">cDb</span><span class="p">]</span> <span class="p">=</span> <span class="n">dwt2</span><span class="p">(</span><span class="n">double</span><span class="p">(</span><span class="n">Ab</span><span class="p">),</span><span class="s">&#39;haar&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">mov</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="p">[</span><span class="n">cAr</span><span class="p">,</span><span class="n">cHr</span><span class="p">,</span><span class="n">cVr</span><span class="p">,</span><span class="n">cDr</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">mov</span><span class="p">(:,:,</span><span class="mi">2</span><span class="p">)</span> <span class="p">=</span> <span class="p">[</span><span class="n">cAg</span><span class="p">,</span><span class="n">cHg</span><span class="p">,</span><span class="n">cVg</span><span class="p">,</span><span class="n">cDg</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">mov</span><span class="p">(:,:,</span><span class="mi">3</span><span class="p">)</span> <span class="p">=</span> <span class="p">[</span><span class="n">cAb</span><span class="p">,</span><span class="n">cHb</span><span class="p">,</span><span class="n">cVb</span><span class="p">,</span><span class="n">cDb</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">writeVideo</span><span class="p">(</span><span class="n">mov0</span><span class="p">,</span><span class="n">uint8</span><span class="p">(</span><span class="n">mov</span><span class="p">));</span> <span class="c">%There is some problem   </span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">i</span><span class="p">=</span> <span class="nb">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">close</span><span class="p">(</span><span class="n">mov0</span><span class="p">);</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -634,6 +798,10 @@ Quantization This example shows how to compress a video using motion compensatio
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/01/13/simulink-details/">Avi Video Processing</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2017/01/12/using-matlab-to-deal-with-video/">Using Matlab to Deal With Video</a>

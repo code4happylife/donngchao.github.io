@@ -9,7 +9,7 @@
   <meta name="author" content="LAWES">
 
   
-  <meta name="description" content="在交通运输、工业生产、通信广播、生物医药、遥感测绘等工程应用以及科学研究领域中，常常需要将采集到的视频影像以AVI格式存储为数字视频文件再进行分析和处理，由于运动图像是由一帧帧静态图像组成的，因此视频文件的数据量是非常大的，这给信息的存储、分析、处理和传输都带来了一定的困难。 &hellip;">
+  <meta name="description" content="自然界的运动规律及新出现的几何或物理量与坐标系无关，在处理具体问题时，总得引进一个较为方便的坐标系。这样一来，由于被研究的对象要加上一个偶然选择的坐标系，因此得到的解析结果不仅反映那些我们想要的东西，而且也附带了一些我们不想要的东西，这在理论研究中有时会引起不必要的复杂化，于是， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,50 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/01/17/something-about-tensor/">Something About Tensor</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-01-17T16:56:16+08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>4:56 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>自然界的运动规律及新出现的几何或物理量与坐标系无关，在处理具体问题时，总得引进一个较为方便的坐标系。这样一来，由于被研究的对象要加上一个偶然选择的坐标系，因此得到的解析结果不仅反映那些我们想要的东西，而且也附带了一些我们不想要的东西，这在理论研究中有时会引起不必要的复杂化，于是，研究者开始寻求一种与坐标系无关的数学分析方法。</p>
+
+<p>张量（Tensor）的引入解决了这一难题，使推导简化，而且能充分反映事物的属性，它在力学、几何学、电磁场和相对论等方面有着广泛的应用。近年来，图像处理和机器视觉的研究中也经常遇到张量形式的数据。例如，灰度图像可以表示成二阶张量，彩色图像和步态序列可以引入三阶张量。为了处理的需要，数据常被人为组装成张量模式，像环境监控中的数据可以视为以时间、位置和类型组合而成的三阶张量；网络图挖掘、网络辩论及人脸识别中也用到张量形式的数据。矩阵和张量已成为三维机器视觉的基本数学工具。</p>
+
+<p>这里主要介绍张量的由来和一些基本概念，并且可以消除一些对于张量的“陌生”和“敬畏”，由于协变张量、逆变张量起源于电动力学中关于电磁场协变理论的研究，其应用也主要集中于物理的电磁分析领域。对于矢量代数部分，如标量和矢量的概念、矢量加法的平行四边形法则、矢量的纯量积、矢量积、三重积、对偶基矢量等不加赘述。</p>
+
+<p>张量是与标量和矢量相对来说的，在许多数学教科书中，张量被处理成矢量（向量）的自然推广。在历史上，张量概念几乎与矢量概念同时产生，张量分析也是与矢量分析几乎同步地发展起来的。张量的概念最初被Tullio Levi-Civia 和 Gregorio Ricci-Curbastro提出，而“tensor”这个单词则是1846年被William Rowan Hamilton 正式提出。19世纪高斯、黎曼、克里斯托弗等将张量概念引入到微分几何的研究过程中，后由李奇和他的学生发展为张量分析，1915年由于爱因斯坦在相对论中的应用而受到广泛关注（广义相对论就是完全用张量的语言描述的）。现在张量已经渗透和应用于许多科学与技术领域，张量不仅是数学和物理学科的重要专业基础知识而且是工程技术研究的重要工具。</p>
+
+<p>下面先从张量的定义开始介绍张量的相关数学知识。</p>
+
+<p>首先明确一下矢量空间及其对偶空间的定义，然后看看张量的定义。</p>
+
+<p>令V表示n维实矢量空间，则将V中矢量映射到实数空间R中某一元素的线性函数L(V,R)构成的空间与V维数相等且同构，通常我们称这一空间为V的对偶空间，用V*来表示。</p>
+
+<p>如果{V1,V2,&hellip;,Vs}是矢量空间V中的元素的集合，而一个s阶线性函数A构成如下映射，即
+A:V1<em>V2</em>&hellip;Vs -> R,且映射A满足如下条件，即，A(V1，V2，V3，&hellip;,a1Vi,a2Vi<sup>2</sup>,&hellip;Vs)=a1A(V1,V2,&hellip;,Vi,&hellip;,Vs)+a2A(V1,V2,V3,&hellip;,Vs)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -798,6 +842,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/01/17/something-about-tensor/">Something About Tensor</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2017/01/13/simulink-details/">Avi Video Processing</a>

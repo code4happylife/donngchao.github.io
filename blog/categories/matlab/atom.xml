@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Matlab | Blog to be better everyday]]></title>
   <link href="http://donngchao.github.io/blog/categories/matlab/atom.xml" rel="self"/>
   <link href="http://donngchao.github.io/"/>
-  <updated>2017-01-18T16:46:37+08:00</updated>
+  <updated>2017-01-18T19:22:30+08:00</updated>
   <id>http://donngchao.github.io/</id>
   <author>
     <name><![CDATA[LAWES]]></name>
@@ -56,46 +56,54 @@ Movi_stat = fscanf(fp,'%c',4);%数据块起始标记‘LIST’
 <p> writeVideo(v,img) writes data from an array to the video file associated with v.</p></blockquote>
 
 <pre><code class="matlab Use haar method deal with video">
-fileinfo = VideoReader('shuttle.avi');
+fileinfo = VideoReader('shuttle.avi');%读取文件信息
 
-mov0 = VideoWriter('compressed');
+mov0 = VideoWriter('compressed');%创建新的输出文件
 
 open(mov0);
 
 i = 1;
 
-mov1 = VideoReader('shuttle.avi');
+mov1 = VideoReader('shuttle.avi');%读取其中的每一帧
 
-while(mov1.hasFrame)  
+while(mov1.hasFrame)  %每次处理其中一帧
 
-    temp = readFrame(mov1);
+    temp = readFrame(mov1);%将其中的一帧存到temp
 
-    imwrite(temp,strcat('m',int2str(i),'.bmp'),'bmp');
+    imwrite(temp,strcat('m',int2str(i),'.bmp'),'bmp');%将视频帧转换成bmp图像文件
 
-    Ar = temp(:,:,1);
+    Ar = temp(:,:,1);%分离红色分量
 
-    Ag = temp(:,:,2);
+    Ag = temp(:,:,2);%分离绿色分量
 
-    Ab = temp(:,:,3);
+    Ab = temp(:,:,3);%分离蓝色分量
 
-    [cAr,cHr,cVr,cDr] = dwt2(double(Ar),'haar');
+    [cAr,cHr,cVr,cDr] = dwt2(double(Ar),'haar');%红色分量二维haar小波变换
 
-    [cAg,cHg,cVg,cDg] = dwt2(double(Ag),'haar');
+    [cAg,cHg,cVg,cDg] = dwt2(double(Ag),'haar');%绿色分量二维haar小波变换
 
-    [cAb,cHb,cVb,cDb] = dwt2(double(Ab),'haar');
+    [cAb,cHb,cVb,cDb] = dwt2(double(Ab),'haar');%蓝色分量二维haar小波变换
 
     mov(:,:,1) = [cAr,cHr,cVr,cDr];
 
     mov(:,:,2) = [cAg,cHg,cVg,cDg];
 
-    mov(:,:,3) = [cAb,cHb,cVb,cDb];    
+    mov(:,:,3) = [cAb,cHb,cVb,cDb];
 
-    writeVideo(mov0,uint8(mov)); %There is some problem   
+    imwrite(uint8(mov),strcat('new',int2str(i),'.bmp'),'bmp'); %处理后的每一帧图片   
+
+    writeVideo(mov0,uint8(mov)); %将处理后的帧写入到新的视频文件中
 
     i= i + 1;
+
 end
+
 close(mov0);
 </code></pre>
+
+<blockquote><p>根据AVI文件的内部结构，利用Matlab提供的函数，尤其是专用的音频和视频处理函数，可以方便地将AVI文件中的图像信息提取出来并存储为一组静态图片，然后再进行变换、压缩等其他分析和处理。</p>
+
+<p>当然也可以根据需要提取文件中的其他信息，还可以按不同的参数将一系列静态图片合并写入一个新的AVI文件。该方法编程简单、操作方便、实用性强、数据处理可靠、程序运行较快。</p></blockquote>
 ]]></content>
   </entry>
   

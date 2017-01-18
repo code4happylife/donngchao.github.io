@@ -4,7 +4,7 @@
   <title><![CDATA[Blog to be better everyday]]></title>
   <link href="http://donngchao.github.io/atom.xml" rel="self"/>
   <link href="http://donngchao.github.io/"/>
-  <updated>2017-01-18T16:46:37+08:00</updated>
+  <updated>2017-01-18T19:22:30+08:00</updated>
   <id>http://donngchao.github.io/</id>
   <author>
     <name><![CDATA[LAWES]]></name>
@@ -136,33 +136,37 @@ A:V1<em>V2</em>&hellip;Vs -> R,且映射A满足如下条件，即，A(V1，V2，
 <span class='line-number'>38</span>
 <span class='line-number'>39</span>
 <span class='line-number'>40</span>
-</pre></td><td class='code'><pre><code class='matlab'><span class='line'><span class="n">fileinfo</span> <span class="p">=</span> <span class="n">VideoReader</span><span class="p">(</span><span class="s">&#39;shuttle.avi&#39;</span><span class="p">);</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='matlab'><span class='line'><span class="n">fileinfo</span> <span class="p">=</span> <span class="n">VideoReader</span><span class="p">(</span><span class="s">&#39;shuttle.avi&#39;</span><span class="p">);</span><span class="c">%读取文件信息</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">mov0</span> <span class="p">=</span> <span class="n">VideoWriter</span><span class="p">(</span><span class="s">&#39;compressed&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="n">mov0</span> <span class="p">=</span> <span class="n">VideoWriter</span><span class="p">(</span><span class="s">&#39;compressed&#39;</span><span class="p">);</span><span class="c">%创建新的输出文件</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">open</span><span class="p">(</span><span class="n">mov0</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'><span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">mov1</span> <span class="p">=</span> <span class="n">VideoReader</span><span class="p">(</span><span class="s">&#39;shuttle.avi&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="n">mov1</span> <span class="p">=</span> <span class="n">VideoReader</span><span class="p">(</span><span class="s">&#39;shuttle.avi&#39;</span><span class="p">);</span><span class="c">%读取其中的每一帧</span>
 </span><span class='line'>
-</span><span class='line'><span class="k">while</span><span class="p">(</span><span class="n">mov1</span><span class="p">.</span><span class="n">hasFrame</span><span class="p">)</span>
+</span><span class='line'><span class="k">while</span><span class="p">(</span><span class="n">mov1</span><span class="p">.</span><span class="n">hasFrame</span><span class="p">)</span>  <span class="c">%每次处理其中一帧</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="n">temp</span> <span class="p">=</span> <span class="n">readFrame</span><span class="p">(</span><span class="n">mov1</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">temp</span> <span class="p">=</span> <span class="n">readFrame</span><span class="p">(</span><span class="n">mov1</span><span class="p">);</span><span class="c">%将其中的一帧存到temp</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="n">imwrite</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span><span class="n">strcat</span><span class="p">(</span><span class="s">&#39;m&#39;</span><span class="p">,</span><span class="n">int2str</span><span class="p">(</span><span class="nb">i</span><span class="p">),</span><span class="s">&#39;.bmp&#39;</span><span class="p">),</span><span class="s">&#39;bmp&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">imwrite</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span><span class="n">strcat</span><span class="p">(</span><span class="s">&#39;m&#39;</span><span class="p">,</span><span class="n">int2str</span><span class="p">(</span><span class="nb">i</span><span class="p">),</span><span class="s">&#39;.bmp&#39;</span><span class="p">),</span><span class="s">&#39;bmp&#39;</span><span class="p">);</span><span class="c">%将视频帧转换成bmp图像文件</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="n">Ar</span> <span class="p">=</span> <span class="n">temp</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Ar</span> <span class="p">=</span> <span class="n">temp</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">);</span><span class="c">%分离红色分量</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="n">Ag</span> <span class="p">=</span> <span class="n">temp</span><span class="p">(:,:,</span><span class="mi">2</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Ag</span> <span class="p">=</span> <span class="n">temp</span><span class="p">(:,:,</span><span class="mi">2</span><span class="p">);</span><span class="c">%分离绿色分量</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="n">Ab</span> <span class="p">=</span> <span class="n">temp</span><span class="p">(:,:,</span><span class="mi">3</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Ab</span> <span class="p">=</span> <span class="n">temp</span><span class="p">(:,:,</span><span class="mi">3</span><span class="p">);</span><span class="c">%分离蓝色分量</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="p">[</span><span class="n">cAr</span><span class="p">,</span><span class="n">cHr</span><span class="p">,</span><span class="n">cVr</span><span class="p">,</span><span class="n">cDr</span><span class="p">]</span> <span class="p">=</span> <span class="n">dwt2</span><span class="p">(</span><span class="n">double</span><span class="p">(</span><span class="n">Ar</span><span class="p">),</span><span class="s">&#39;haar&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">cAr</span><span class="p">,</span><span class="n">cHr</span><span class="p">,</span><span class="n">cVr</span><span class="p">,</span><span class="n">cDr</span><span class="p">]</span> <span class="p">=</span> <span class="n">dwt2</span><span class="p">(</span><span class="n">double</span><span class="p">(</span><span class="n">Ar</span><span class="p">),</span><span class="s">&#39;haar&#39;</span><span class="p">);</span><span class="c">%红色分量二维haar小波变换</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="p">[</span><span class="n">cAg</span><span class="p">,</span><span class="n">cHg</span><span class="p">,</span><span class="n">cVg</span><span class="p">,</span><span class="n">cDg</span><span class="p">]</span> <span class="p">=</span> <span class="n">dwt2</span><span class="p">(</span><span class="n">double</span><span class="p">(</span><span class="n">Ag</span><span class="p">),</span><span class="s">&#39;haar&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">cAg</span><span class="p">,</span><span class="n">cHg</span><span class="p">,</span><span class="n">cVg</span><span class="p">,</span><span class="n">cDg</span><span class="p">]</span> <span class="p">=</span> <span class="n">dwt2</span><span class="p">(</span><span class="n">double</span><span class="p">(</span><span class="n">Ag</span><span class="p">),</span><span class="s">&#39;haar&#39;</span><span class="p">);</span><span class="c">%绿色分量二维haar小波变换</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="p">[</span><span class="n">cAb</span><span class="p">,</span><span class="n">cHb</span><span class="p">,</span><span class="n">cVb</span><span class="p">,</span><span class="n">cDb</span><span class="p">]</span> <span class="p">=</span> <span class="n">dwt2</span><span class="p">(</span><span class="n">double</span><span class="p">(</span><span class="n">Ab</span><span class="p">),</span><span class="s">&#39;haar&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">cAb</span><span class="p">,</span><span class="n">cHb</span><span class="p">,</span><span class="n">cVb</span><span class="p">,</span><span class="n">cDb</span><span class="p">]</span> <span class="p">=</span> <span class="n">dwt2</span><span class="p">(</span><span class="n">double</span><span class="p">(</span><span class="n">Ab</span><span class="p">),</span><span class="s">&#39;haar&#39;</span><span class="p">);</span><span class="c">%蓝色分量二维haar小波变换</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="n">mov</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="p">[</span><span class="n">cAr</span><span class="p">,</span><span class="n">cHr</span><span class="p">,</span><span class="n">cVr</span><span class="p">,</span><span class="n">cDr</span><span class="p">];</span>
 </span><span class='line'>
@@ -170,16 +174,22 @@ A:V1<em>V2</em>&hellip;Vs -> R,且映射A满足如下条件，即，A(V1，V2，
 </span><span class='line'>
 </span><span class='line'>    <span class="n">mov</span><span class="p">(:,:,</span><span class="mi">3</span><span class="p">)</span> <span class="p">=</span> <span class="p">[</span><span class="n">cAb</span><span class="p">,</span><span class="n">cHb</span><span class="p">,</span><span class="n">cVb</span><span class="p">,</span><span class="n">cDb</span><span class="p">];</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="n">writeVideo</span><span class="p">(</span><span class="n">mov0</span><span class="p">,</span><span class="n">uint8</span><span class="p">(</span><span class="n">mov</span><span class="p">));</span> <span class="c">%There is some problem   </span>
+</span><span class='line'>    <span class="n">imwrite</span><span class="p">(</span><span class="n">uint8</span><span class="p">(</span><span class="n">mov</span><span class="p">),</span><span class="n">strcat</span><span class="p">(</span><span class="s">&#39;new&#39;</span><span class="p">,</span><span class="n">int2str</span><span class="p">(</span><span class="nb">i</span><span class="p">),</span><span class="s">&#39;.bmp&#39;</span><span class="p">),</span><span class="s">&#39;bmp&#39;</span><span class="p">);</span> <span class="c">%处理后的每一帧图片   </span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">writeVideo</span><span class="p">(</span><span class="n">mov0</span><span class="p">,</span><span class="n">uint8</span><span class="p">(</span><span class="n">mov</span><span class="p">));</span> <span class="c">%将处理后的帧写入到新的视频文件中</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="nb">i</span><span class="p">=</span> <span class="nb">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>
 </span><span class='line'><span class="k">end</span>
+</span><span class='line'>
 </span><span class='line'><span class="n">close</span><span class="p">(</span><span class="n">mov0</span><span class="p">);</span>
 </span><span class='line'>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<blockquote><p>根据AVI文件的内部结构，利用Matlab提供的函数，尤其是专用的音频和视频处理函数，可以方便地将AVI文件中的图像信息提取出来并存储为一组静态图片，然后再进行变换、压缩等其他分析和处理。</p>
 
+<p>当然也可以根据需要提取文件中的其他信息，还可以按不同的参数将一系列静态图片合并写入一个新的AVI文件。该方法编程简单、操作方便、实用性强、数据处理可靠、程序运行较快。</p></blockquote>
 ]]></content>
   </entry>
   

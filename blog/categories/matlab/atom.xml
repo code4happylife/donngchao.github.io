@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Matlab | Blog to be better everyday]]></title>
   <link href="http://donngchao.github.io/blog/categories/matlab/atom.xml" rel="self"/>
   <link href="http://donngchao.github.io/"/>
-  <updated>2017-01-18T15:41:09+08:00</updated>
+  <updated>2017-01-18T16:46:37+08:00</updated>
   <id>http://donngchao.github.io/</id>
   <author>
     <name><![CDATA[LAWES]]></name>
@@ -58,7 +58,7 @@ Movi_stat = fscanf(fp,'%c',4);%数据块起始标记‘LIST’
 <pre><code class="matlab Use haar method deal with video">
 fileinfo = VideoReader('shuttle.avi');
 
-mov0 = VideoWriter('compressed.avi');
+mov0 = VideoWriter('compressed');
 
 open(mov0);
 

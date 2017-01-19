@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Matlab | Blog to be better everyday]]></title>
   <link href="http://donngchao.github.io/blog/categories/matlab/atom.xml" rel="self"/>
   <link href="http://donngchao.github.io/"/>
-  <updated>2017-01-18T19:22:30+08:00</updated>
+  <updated>2017-01-19T11:15:40+08:00</updated>
   <id>http://donngchao.github.io/</id>
   <author>
     <name><![CDATA[LAWES]]></name>
@@ -182,6 +182,10 @@ close(mov0);
 <p>前面提到了video compression 的相关技术背景，至于怎样实现呢？ 需要进一步的分析simulink在其中扮演的</p>
 
 <p>角色。</p>
+
+<blockquote><p>通过查阅相关的参考文献，得到了有的算法达到的效果如下：</p>
+
+<p>针对YUV视频格式的特殊性，对于YUV三个分量分别进行压缩，充分利用U,V数据的高内聚性，进而减少迭代次数，降低数据量。对Y分量给予更多次的迭代，充分保证Y的峰值信噪比。通过最终的仿真实验证明，本文提出的张量方法相比较于H.264方法，视频的PSNR（峰值信噪比）和平均码率均有所降低，尤其对于在水平、垂直、帧长方向有大量冗余的数据来说效果更加明显。</p></blockquote>
 ]]></content>
   </entry>
   
